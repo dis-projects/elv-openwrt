@@ -1,0 +1,13 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 26ac78b..f0cd6df 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -34,7 +34,7 @@ else()
+     set(CONFIG_REGION "xip0")
+     set(CONFIG_ARCH "mips")
+     set(CONFIG_RAM_ADDR "0x9fa00000")
+-    set(BINFILE_FORMAT "elf32-littlemips")
++    set(BINFILE_FORMAT "elf32-tradlittlemips")
+ endif()
+ 
+ set(FNAME sbl-${CONFIG_ARCH})
