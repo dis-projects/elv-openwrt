@@ -1188,3 +1188,9 @@ config KERNEL_UBIFS_FS_SECURITY
 
 config KERNEL_JFFS2_FS_SECURITY
 	bool "JFFS2 Security Labels"
+
+config KERNEL_MMC
+	bool "MMC/SD/SDIO card support"
+
+config KERNEL_MMC_BLOCK
+	bool "MMC block device driver"
