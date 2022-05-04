@@ -2,8 +2,8 @@ ARCH:=aarch64
 SUBTARGET:=mcom03
 BOARDNAME:=MCom-03
 CPU_TYPE:=cortex-a53
-FEATURES+=ext4 dt usb pcie rtc gpio display rootfs-part boot-part
+FEATURES+=targz dt usb pcie rtc gpio
 
 define Target/Description
-	Build images for Elvees MCom-03 (1892ВА018) boards.
+	Build images for Elvees MCom-03 (1892BA018) boards.
 endef

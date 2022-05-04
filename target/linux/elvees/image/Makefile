@@ -1,29 +1,9 @@
 include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/image.mk
 
-FAT32_BLOCK_SIZE=1024
-FAT32_BLOCKS=$(shell echo $$(($(CONFIG_TARGET_KERNEL_PARTSIZE)*1024*1024/$(FAT32_BLOCK_SIZE))))
-
-### Image scripts ###
-define Build/boot-common
-	rm -f $@.boot
-	mkfs.fat -n boot -C $@.boot $(FAT32_BLOCKS)
-	mcopy -i $@.boot $(IMAGE_KERNEL) ::$(KERNEL_IMG)
-	$(foreach dts,$(shell echo $(DEVICE_DTS)),mcopy -i $@.boot $(DTS_DIR)/$(dts).dtb ::;)
-endef
-
-define Build/sdcard-img
-	./gen_sdcard_img.sh $@ $@.boot $(IMAGE_ROOTFS) \
-		$(CONFIG_TARGET_KERNEL_PARTSIZE) $(CONFIG_TARGET_ROOTFS_PARTSIZE)
-endef
-
 ### Devices ###
 define Device/Default
 	DEVICE_VENDOR := Elvees
-	KERNEL := kernel-bin
-	KERNEL_IMG := kernel.img
-	IMAGES := sdcard.img.gz
-	IMAGE/sdcard.img.gz := boot-common | sdcard-img | gzip
 endef
 
 define Device/elvmc03smarc-ngfwcb
@@ -51,5 +31,15 @@ endef
 ifeq ($(SUBTARGET),mcom03)
 	TARGET_DEVICES += elvmc03smarc-rockpi-n10
 endif
+
+define Image/InstallKernel
+	mkdir -p $(TARGET_DIR)/boot
+	$(CP) $(KDIR)/Image $(TARGET_DIR)/boot/
+	$(foreach dts,$(DEVICE_DTS), $(CP) $(KDIR)/image-$(dts).dtb $(TARGET_DIR)/boot/$(dts).dtb;)
+	$(CP) $(KDIR)/image-*.dtb $(TARGET_DIR)/boot/
+
+	mkdir -p $(TARGET_DIR)/boot/extlinux/
+	$(CP) ./extlinux.conf $(TARGET_DIR)/boot/extlinux/
+endef
 
 $(eval $(call BuildImage))
