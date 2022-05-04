@@ -731,11 +731,11 @@ define BuildImage
   endif
 
   kernel_prepare: image_prepare
-	$(call Image/Build/targz)
-	$(call Image/Build/cpiogz)
 	$(call Image/BuildKernel)
 	$(if $(CONFIG_TARGET_ROOTFS_INITRAMFS),$(if $(IB),,$(call Image/BuildKernel/Initramfs)))
 	$(call Image/InstallKernel)
+	$(call Image/Build/targz)
+	$(call Image/Build/cpiogz)
 
   $(foreach device,$(TARGET_DEVICES),$(call Device,$(device)))
 
