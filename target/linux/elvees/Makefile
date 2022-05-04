@@ -16,4 +16,7 @@ DEFAULT_PACKAGES+=bash binutils libopenssl python3 mtd busybox docker dockerd lu
 # Packages for QA
 DEFAULT_PACKAGES+=iperf3 hdparm i2c-tools lm-sensors nmap tinymembench
 
+# Packages for demo
+DEFAULT_PACKAGES+=mwan3 luci-app-mwan3 bmon
+
 $(eval $(call BuildTarget))
