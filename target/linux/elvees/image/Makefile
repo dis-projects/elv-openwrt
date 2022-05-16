@@ -12,7 +12,7 @@ define Device/elvmc03smarc-ngfwcb
 	SUPPORTED_DEVICES := \
 		elvees,elvmc03smarc-r1.0-ngfwcb-r1.0 \
 		elvees,elvmc03smarc-ngfwcb
-	DEVICE_PACKAGES := kmod-hwmon-mr75202
+	DEVICE_PACKAGES := kmod-hwmon-mr75202 kmod-rtc-rv8803
 	UBOOT := elvmc03smarc-ngfwcb
 endef
 ifeq ($(SUBTARGET),mcom03)
@@ -27,7 +27,7 @@ define Device/elvmc03smarc-rockpi-n10
 	SUPPORTED_DEVICES := \
 		elvees,elvmc03smarc-r1.0-rockpi-n10 \
 		elvees,elvmc03smarc-rockpi-n10
-	DEVICE_PACKAGES := kmod-hwmon-mr75202
+	DEVICE_PACKAGES := kmod-hwmon-mr75202 kmod-rtc-rv8803
 	UBOOT := elvmc03smarc-rockpi-n10
 endef
 ifeq ($(SUBTARGET),mcom03)
