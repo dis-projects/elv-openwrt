@@ -570,3 +570,16 @@ endef
 $(eval $(call KernelPackage,hwmon-adcxx))
 
 
+define KernelPackage/hwmon-mr75202
+  TITLE:=Moortec Semiconductor MR75202 monitoring support
+  KCONFIG:=CONFIG_SENSORS_MR75202
+  FILES:=$(LINUX_DIR)/drivers/hwmon/mr75202.ko
+  AUTOLOAD:=$(call AutoProbe,mr75202)
+  $(call AddDepends/hwmon,)
+endef
+
+define KernelPackage/hwmon-mr75202/description
+ Kernel module for Moortec MR75202 PVT controller
+endef
+
+$(eval $(call KernelPackage,hwmon-mr75202))

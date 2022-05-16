@@ -733,6 +733,23 @@ endef
 
 $(eval $(call KernelPackage,rtc-s35390a))
 
+define KernelPackage/rtc-rv8803
+  SUBMENU:=$(OTHER_MENU)
+  TITLE:=Micro Crystal RV-8803
+  DEFAULT:=m if ALL_KMODS && RTC_SUPPORT
+  DEPENDS:=+kmod-i2c-core
+  KCONFIG:=CONFIG_RTC_DRV_RV8803 \
+	CONFIG_RTC_CLASS=y
+  FILES:=$(LINUX_DIR)/drivers/rtc/rtc-rv8803.ko
+  AUTOLOAD:=$(call AutoProbe,rtc-rv8803)
+endef
+
+define KernelPackage/rtc-rv8803/description
+ Kernel module for Micro Crystal RV-8803 I2C RTC chip
+endef
+
+$(eval $(call KernelPackage,rtc-rv8803))
+
 
 define KernelPackage/mtdtests
   SUBMENU:=$(OTHER_MENU)
