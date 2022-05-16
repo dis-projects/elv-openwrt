@@ -600,6 +600,7 @@ define Package/iptables/install
 	$(CP) $(PKG_INSTALL_DIR)/usr/sbin/xtables-legacy-multi $(1)/usr/sbin/
 	$(CP) $(PKG_INSTALL_DIR)/usr/sbin/iptables{,-restore,-save} $(1)/usr/sbin/
 	$(INSTALL_DIR) $(1)/usr/lib/iptables
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/iptables/libipt_MASQUERADE.so $(1)/usr/lib/iptables/
 endef
 
 define Package/iptables-nft/install
