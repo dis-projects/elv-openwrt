@@ -19,6 +19,9 @@ extern int verbose;
 extern int stop_on_error;
 extern ulv available_bit_mask;
 
+union mword8_type mword8;
+union mword16_type mword16;
+
 int compare_regions_bfailure(ulv * bufa, ulv * bufb, size_t count)
 {
     int r = 0;
