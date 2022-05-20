@@ -14,7 +14,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <errno.h>
-#include <error.h>
+#include <bsd/err.h>
 
 #include "types.h"
 #include "sizes.h"
@@ -112,7 +112,7 @@ int main(int argc, char **argv)
 
     pagesize = get_pagesize();
     if (pagesize == -1)
-        error(EXIT_FAIL_PREPARE, 0, "Failed to get pagesize.");
+        err(EXIT_FAIL_PREPARE, "Failed to get pagesize.");
 
     while ((opt = getopt(argc, argv, "i:p:b:w:r:m:hev")) != -1) {
         switch (opt) {
@@ -120,13 +120,13 @@ int main(int argc, char **argv)
             errno = 0;
             physaddrbase = (off_t) strtoull(optarg, &addrsuffix, 16);
             if (errno != 0) {
-                error(EXIT_FAIL_PREPARE, 0,
+                err(EXIT_FAIL_PREPARE,
                       "failed to parse physaddrbase arg; should be hex "
                       "address (0x123...)");
             }
             if (*addrsuffix != '\0') {
                 /* got an invalid character in the address */
-                error(EXIT_FAIL_PREPARE, 0,
+                err(EXIT_FAIL_PREPARE,
                       "failed to parse physaddrbase arg; should be hex "
                       "address (0x123...)");
             }
@@ -136,13 +136,13 @@ int main(int argc, char **argv)
             errno = 0;
             available_bit_mask = strtoul(optarg, &addrsuffix, 16);
             if (errno != 0) {
-                error(EXIT_FAIL_PREPARE, 0,
+                err(EXIT_FAIL_PREPARE,
                       "failed to parse bitmask arg; should be hex "
                       "address (0x123...)");
             }
             if (*addrsuffix != '\0') {
                 /* got an invalid character in the address */
-                error(EXIT_FAIL_PREPARE, 0,
+                err(EXIT_FAIL_PREPARE,
                       "failed to parse bitmask arg; should be hex "
                       "address (0x123...)");
             }
@@ -172,13 +172,13 @@ int main(int argc, char **argv)
     }
 
     if (optind >= argc)
-        error(EXIT_FAIL_PREPARE, 0,
+        err(EXIT_FAIL_PREPARE,
               "memtester-simple #%d: need memory argument, in B|K|M", id);
 
     errno = 0;
     wantraw = (size_t) strtoul(argv[optind], &memsuffix, 0);
     if (errno != 0)
-        error(EXIT_FAIL_PREPARE, 0,
+        err(EXIT_FAIL_PREPARE,
               "memtester-simple #%d: failed to parse memory argument", id);
 
     switch (*memsuffix) {
@@ -203,12 +203,12 @@ int main(int argc, char **argv)
     wantmb = (wantbytes_orig >> 20);
     optind++;
     if (wantmb > maxmb)
-        error(EXIT_FAIL_PREPARE, 0,
+        err(EXIT_FAIL_PREPARE,
               "memtester-simple #%d: this system can only address %llu MB.",
               id, (ull) maxmb);
 
     if ((physaddrbase == -1) && (wantbytes < pagesize))
-        error(EXIT_FAIL_PREPARE, 0,
+        err(EXIT_FAIL_PREPARE,
               "memtester-simple #%d: bytes %ld < pagesize %ld -- memory argument too large?",
               id, wantbytes, pagesize);
 
@@ -218,11 +218,11 @@ int main(int argc, char **argv)
         errno = 0;
         loops = strtoul(argv[optind], &loopsuffix, 0);
         if (errno != 0)
-            error(EXIT_FAIL_PREPARE, 0,
+            err(EXIT_FAIL_PREPARE,
                   "memtester-simple #%d: failed to parse number of loops", id);
 
         if (*loopsuffix != '\0')
-            error(EXIT_FAIL_PREPARE, 0,
+            err(EXIT_FAIL_PREPARE,
                   "memtester-simple #%d: loop suffix %c", id, *loopsuffix);
     }
 
@@ -236,7 +236,7 @@ int main(int argc, char **argv)
 
         memfd = open(device_name, O_RDWR | O_SYNC);
         if (memfd == -1) {
-            error(EXIT_FAIL_PREPARE, 0,
+            err(EXIT_FAIL_PREPARE,
                   "failed to open %s for physical memory: %s",
                   device_name, strerror(errno));
         }
@@ -245,13 +245,13 @@ int main(int argc, char **argv)
                                      MAP_SHARED | MAP_LOCKED, memfd,
                                      physaddrbase_aligned);
         if (buf == MAP_FAILED) {
-            error(EXIT_FAIL_PREPARE, 0,
+            err(EXIT_FAIL_PREPARE,
                   "failed to mmap %s for physical memory: %s",
                   device_name, strerror(errno));
         }
 
         if (mlock((void *) buf, wantbytes_aligned) < 0) {
-            error(0, 0, "failed to mlock mmap'ed space");
+            err(0, "failed to mlock mmap'ed space");
             do_mlock = 0;
         }
 
@@ -318,7 +318,7 @@ int main(int argc, char **argv)
     }
 
     if (!do_mlock)
-        error(1, EXIT_FAIL_PREPARE,
+        err(1,
               "memtester-simple #%d, continuing with unlocked memory; testing "
               "will be slower and less reliable.", id);
 

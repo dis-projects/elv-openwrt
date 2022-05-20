@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
-#include <error.h>
+#include <bsd/err.h>
 
 #include "types.h"
 #include "sizes.h"
@@ -30,22 +30,22 @@ int compare_regions_bfailure(ulv * bufa, ulv * bufb, size_t count)
         if ((*p1 & available_bit_mask) != (*p2 & available_bit_mask)) {
             r += 1;
             if (verbose) {
-                error(0, 0,
+                err(0,
                       "memtester-simple #%d: FAILURE: 0x%08lx != 0x%08lx at offset 0x%08lx.\n",
                       id, (ul) *p1 & available_bit_mask, (ul) *p2 & available_bit_mask, (ul) (i * sizeof(ul)));
 
                 if ((((*p1 & available_bit_mask) >> 24) & 0xff) !=
                                 (((*p2 & available_bit_mask) >> 24) & 0xff))
-                    error(0, 0, "#%d: failure in byte 3\n", id);
+                    err(0, "#%d: failure in byte 3\n", id);
                 if ((((*p1 & available_bit_mask) >> 16) & 0xff) !=
                                 (((*p2 & available_bit_mask) >> 16) & 0xff))
-                    error(0, 0, "#%d: failure in byte 2\n", id);
+                    err(0, "#%d: failure in byte 2\n", id);
                 if ((((*p1 & available_bit_mask) >> 8) & 0xff) !=
                                 (((*p2 & available_bit_mask) >> 8) & 0xff))
-                    error(0, 0, "#%d: failure in byte 1\n", id);
+                    err(0, "#%d: failure in byte 1\n", id);
                 if ((((*p1 & available_bit_mask) >> 0) & 0xff) !=
                                 (((*p2 & available_bit_mask) >> 0) & 0xff))
-                    error(0, 0, "#%d: failure in byte 0\n", id);
+                    err(0, "#%d: failure in byte 0\n", id);
             }
 
             if (stop_on_error)
