@@ -11,12 +11,15 @@ include $(INCLUDE_DIR)/target.mk
 
 KERNELNAME:=Image dtbs
 
-DEFAULT_PACKAGES+=bash binutils libopenssl python3 mtd busybox docker dockerd luci
+DEFAULT_PACKAGES+=bash binutils libopenssl python3 mtd busybox luci
+
+# Docker packages
+DEFAULT_PACKAGES+=docker dockerd docker-compose
 
 # Packages for QA
 DEFAULT_PACKAGES+=iperf3 hdparm i2c-tools lm-sensors nmap tinymembench
 
-# Packages for demo
-DEFAULT_PACKAGES+=mwan3 luci-app-mwan3 bmon
+# Automatic failure recovery for network demo
+DEFAULT_PACKAGES+=mwan3 luci-app-mwan3
 
 $(eval $(call BuildTarget))
