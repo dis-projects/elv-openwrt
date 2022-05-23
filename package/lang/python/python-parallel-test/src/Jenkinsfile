@@ -1,0 +1,20 @@
+node('linter') {
+    stage('Checkout') {
+        checkout scm
+    }
+    stage('Create tox') {
+        sh '''
+            python3 -m venv .venv
+            source .venv/bin/activate
+            pip install setuptools --upgrade
+            pip install pip --upgrade
+            pip install tox
+        '''
+    }
+    stage('Tox') {
+        sh '''
+            source .venv/bin/activate
+            tox
+        '''
+    }
+}
