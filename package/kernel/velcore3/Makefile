@@ -12,7 +12,7 @@ define KernelPackage/elvees-elcore50
   SUBMENU:=Other modules
   DEPENDS:=@TARGET_elvees_mcom03
   TITLE:=Elvees ELcore-50 driver
-  AUTOLOAD:=$(call AutoProbe,elcore50)
+  # AUTOLOAD:=$(call AutoProbe,elcore50)
   FILES:= \
 	$(PKG_BUILD_DIR)/elcore50.ko \
 	$(PKG_BUILD_DIR)/elcore50-mmualloc.ko
