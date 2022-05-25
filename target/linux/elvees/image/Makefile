@@ -5,11 +5,13 @@ include $(INCLUDE_DIR)/image.mk
 define Device/Default
 	DEVICE_VENDOR := Elvees
 	DEVICE_PACKAGES := \
-		kmod-hwmon-mr75202 \
-		kmod-rtc-rv8803 \
 		kmod-elvees-elcore50 \
 		kmod-elvees-qlic \
-		kmod-elvees-vdmaacptest
+		kmod-elvees-vdmaacptest \
+		kmod-fb \
+		kmod-hwmon-mr75202 \
+		kmod-rtc-rv8803 \
+		kmod-usb-hid
 endef
 
 define Device/elvmc03smarc-ngfwcb
