@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: GPL-2.0
+
+config ELCORE50_VP
+	bool "ELCORE50_VP"
+	depends on PACKAGE_kmod-elvees-elcore50
+	help
+	  Define symbol 'ELCORE50_VP' in elcore50 driver
+
+config ELCORE50_NO_IRQS
+	bool "ELCORE50_NO_IRQS"
+	depends on PACKAGE_kmod-elvees-elcore50
+	help
+	  Define symbol 'ELCORE50_NO_IRQS' in elcore50 driver
+
+config VELCORE3_DRIVER_TRACE
+	bool "Build driver for tracing"
+	depends on PACKAGE_kmod-elvees-elcore50
+	help
+	  The elcore50 driver should be compiled with -fno-inline
+	  for accessibility of all driver functions via ftrace.

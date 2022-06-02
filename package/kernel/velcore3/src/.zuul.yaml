@@ -1,0 +1,6 @@
+- project:
+    check:
+      jobs:
+        - solaris-buildroot-build:
+            irrelevant-files: &elcore50-irrelevant-files
+              - .*\.rst
