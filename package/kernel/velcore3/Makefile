@@ -61,7 +61,7 @@ PKG_EXTRA_KCONFIG:= \
 PKG_EXTRA_CFLAGS:= \
 	$(patsubst CONFIG_%, -D%=1, $(patsubst %=m,%,$(filter %=m,$(PKG_EXTRA_KCONFIG)))) \
 	$(patsubst CONFIG_%, -D%=1, $(patsubst %=y,%,$(filter %=y,$(PKG_EXTRA_KCONFIG)))) \
-	$(if $(CONFIG_TARGET_elvees_mcom03), -DELCORE3_MCOM03=1) \
+	$(if $(CONFIG_TARGET_elvees_mcom03), -DELCORE50_MCOM03=1) \
 	$(if $(CONFIG_VELCORE3_DRIVER_TRACE), -fno-inline) \
 
 define Build/Compile
