@@ -12,7 +12,7 @@ define KernelPackage/elvees-elcore50
   SUBMENU:=Other modules
   DEPENDS:=@TARGET_elvees_mcom03
   TITLE:=Elvees ELcore-50 driver
-  # AUTOLOAD:=$(call AutoProbe,elcore50)
+  AUTOLOAD:=$(call AutoProbe,elcore50)
   FILES:= \
 	$(PKG_BUILD_DIR)/elcore50.ko \
 	$(PKG_BUILD_DIR)/elcore50-mmualloc.ko
@@ -61,7 +61,7 @@ PKG_EXTRA_KCONFIG:= \
 PKG_EXTRA_CFLAGS:= \
 	$(patsubst CONFIG_%, -D%=1, $(patsubst %=m,%,$(filter %=m,$(PKG_EXTRA_KCONFIG)))) \
 	$(patsubst CONFIG_%, -D%=1, $(patsubst %=y,%,$(filter %=y,$(PKG_EXTRA_KCONFIG)))) \
-	$(if $(CONFIG_TARGET_elvees_mcom03), -DELCORE3_MCOM03=1) \
+	$(if $(CONFIG_TARGET_elvees_mcom03), -DELCORE50_MCOM03=1) \
 	$(if $(CONFIG_VELCORE3_DRIVER_TRACE), -fno-inline) \
 
 define Build/Compile
