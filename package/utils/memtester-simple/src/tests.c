@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
-#include <bsd/err.h>
+#include <err.h>
 
 #include "types.h"
 #include "sizes.h"
