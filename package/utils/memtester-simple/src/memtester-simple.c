@@ -14,7 +14,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <errno.h>
-#include <bsd/err.h>
+#include <err.h>
 
 #include "types.h"
 #include "sizes.h"

@@ -9,9 +9,11 @@ define Device/Default
 		kmod-elvees-qlic \
 		kmod-elvees-vdmaacptest \
 		kmod-fb \
+		kmod-i2c-mux-pca954x \
 		kmod-hwmon-mr75202 \
 		kmod-rtc-rv8803 \
-		kmod-usb-hid
+		kmod-usb-hid \
+		kmod-usb-serial-cp210x
 endef
 
 define Device/elvmc03smarc-ngfwcb

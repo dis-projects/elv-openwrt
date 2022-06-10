@@ -11,9 +11,11 @@ PKG_NAME:=python-parallel-test
 PKG_VERSION:=1.0
 PKG_RELEASE:=1
 
+PKG_BUILD_DEPENDS+=python3/host
 HOST_PYTHON3_PACKAGE_BUILD_DEPENDS:=setuptools-scm
 
 include $(INCLUDE_DIR)/package.mk
+include $(TOPDIR)/feeds/packages/lang/python/python3-host.mk
 include $(TOPDIR)/feeds/packages/lang/python/python3-package.mk
 
 define Package/python3-parallel-test
